@@ -44,7 +44,7 @@ body {
     height: 20px;
     margin: 0.2px;
     padding-top: 20px;
-    font-size: 10px;
+    font-size: 25px;
     color: white;
 }
 
@@ -76,6 +76,7 @@ body {
 .empty {
     background-color: #505051;
     outline: 0;
+    border: none;
 }
 
 .number, .operator {

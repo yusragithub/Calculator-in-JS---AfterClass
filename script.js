@@ -1,18 +1,25 @@
 function getHistory() {
-    return document.getElementById("history-value").innerTEXT;
+    return document.getElementById("history-value").innerText;
 }
-
 function printHistory(num) {
-    document.getElementById("history-value").innerTEXT = num;
+    document.getElementById("history-value").innerText = num;
 }
 
 function getOutput() {
-    return document.getElementById("output-value").innerTEXT;
+    return document.getElementById("output-value").innerText;
+}
+function printOutput(num) {
+    if (num == "") {
+        document.getElementById("output-value").innerText = num;
+    }
+    else {
+        document.getElementById("output-value").innerText = getFormattedNumber(num);
+    }
 }
 
 function getFormattedNumber(num) {
-    if (num == "") {
-        return ""
+    if (num == "-") {
+        return "";
     }
     var n = Number(num);
     var value = n.toLocaleString("en");
@@ -23,12 +30,12 @@ function reverseNumberFormat(num) {
     return Number(num.replace(/,/g,''));
 }
 
-var operator = document.getElementByClassName("operator");
+var operator = document.getElementsByClassName("operator");
 for (var i=0; i<operator.length;i++) {
     operator[i].addEventListener('click',function () {
         if (this.id=="clear") {
-            printHistory = "";
-            printOutput = "";
+            printHistory("");
+            printOutput("");
         }
         else if (this.id=="backspace") {
             var output = reverseNumberFormat(getOutput()).toString();
@@ -47,6 +54,7 @@ for (var i=0; i<operator.length;i++) {
             }
             if (output != "" || history != "") {
                 output = output == ""?output:reverseNumberFormat(output);
+                history = history + output;
                 if (this.id == "=") {
                     var result = eval(history);
                     printOutput(result);
@@ -61,8 +69,8 @@ for (var i=0; i<operator.length;i++) {
         }
     });
 }
-var number = document.getElementByClassName("number");
-for (var i=0;i<lnumber.length;i++);
+var number = document.getElementsByClassName("number");
+for (var i=0;i<number.length;i++){
 number[i].addEventListener('click', function(){
     var output = reverseNumberFormat(getOutput());
     if (output!=NaN) {
@@ -70,3 +78,4 @@ number[i].addEventListener('click', function(){
         printOutput (output);
     }
 });
+}
